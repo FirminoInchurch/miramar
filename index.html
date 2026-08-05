@@ -78,6 +78,34 @@
     border-radius:2px;
   }
 
+  #refreshBtn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top: 26px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color: var(--gold);
+    background: rgba(210,162,76,0.08);
+    border: 1px solid rgba(210,162,76,0.4);
+    padding: 9px 16px;
+    border-radius: 999px;
+    cursor:pointer;
+    transition: all .15s ease;
+  }
+  #refreshBtn:hover{
+    background: var(--gold);
+    color: #16323E;
+  }
+  #refreshBtn svg{
+    transition: transform .5s ease;
+  }
+  #refreshBtn.spinning svg{
+    transform: rotate(360deg);
+  }
+
   /* ---------- Search & Filters ---------- */
   .toolbar{
     max-width: 880px;
@@ -352,6 +380,12 @@ function renderGrid(){
 }
 
 searchInput.addEventListener('input', renderGrid);
+
+const refreshBtn = document.getElementById('refreshBtn');
+refreshBtn.addEventListener('click', () => {
+  refreshBtn.classList.add('spinning');
+  window.location.reload();
+});
 
 function parseRowsFromSheet(rows){
   return rows.map(r => {
